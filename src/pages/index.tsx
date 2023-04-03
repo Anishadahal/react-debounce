@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
+import axios from 'axios'
 
-const useDebounce = (value: any, delay: any) => {
+const useDebounce = (value: string, delay: number) => {
   const [debouncedValue, setDebouncedValue] = useState(value);
 
   useEffect(() => {
@@ -17,13 +18,14 @@ const useDebounce = (value: any, delay: any) => {
 };
 
 const SearchBar = () => {
-  const [searchTerm, setSearchTerm] = useState("");
+  const [searchTerm, setSearchTerm] = useState<string>("");
   const debouncedSearchTerm = useDebounce(searchTerm, 500);
 
   const handleSearch = (e: any) => {
     e.preventDefault();
     // Your search logic here using debouncedSearchTerm instead of searchTerm
-    //Example: axios.get('/search?query=debouncedSearchTerm')
+    // Example: 
+    axios.get('/search?query=debouncedSearchTerm')
   };
 
   return (
