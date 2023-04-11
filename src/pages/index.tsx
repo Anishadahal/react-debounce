@@ -1,7 +1,7 @@
+import axios from "axios";
 import { useEffect, useState } from "react";
-import axios from 'axios'
 
-const useDebounce = (value: string, delay: number) => {
+const useDebounce = (value: any, delay: any) => {
   const [debouncedValue, setDebouncedValue] = useState(value);
 
   useEffect(() => {
@@ -18,15 +18,14 @@ const useDebounce = (value: string, delay: number) => {
 };
 
 const SearchBar = () => {
-  const [searchTerm, setSearchTerm] = useState<string>("");
+  const [searchTerm, setSearchTerm] = useState("");
   const debouncedSearchTerm = useDebounce(searchTerm, 500);
+  console.log(debouncedSearchTerm);
 
-  const handleSearch = (e: any) => {
-    e.preventDefault();
+  useEffect(() => {
     // Your search logic here using debouncedSearchTerm instead of searchTerm
-    // Example: 
-    axios.get('/search?query=debouncedSearchTerm')
-  };
+    axios.get(`https://demo.dataverse.org/api/search?q=${debouncedSearchTerm}`);
+  }, [debouncedSearchTerm]);
 
   return (
     <form>
@@ -36,9 +35,6 @@ const SearchBar = () => {
         onChange={(e) => setSearchTerm(e.target.value)}
         placeholder="Search..."
       />
-      <button onClick={handleSearch} type="submit">
-        Search
-      </button>
     </form>
   );
 };
