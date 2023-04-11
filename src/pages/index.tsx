@@ -1,8 +1,8 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 
-const useDebounce = (value: any, delay: any) => {
-  const [debouncedValue, setDebouncedValue] = useState(value);
+const useDebounce = (value: string, delay: number): string => {
+  const [debouncedValue, setDebouncedValue] = useState<string>(value);
 
   useEffect(() => {
     const timeout = setTimeout(() => {
@@ -18,9 +18,8 @@ const useDebounce = (value: any, delay: any) => {
 };
 
 const SearchBar = () => {
-  const [searchTerm, setSearchTerm] = useState("");
+  const [searchTerm, setSearchTerm] = useState<string>("");
   const debouncedSearchTerm = useDebounce(searchTerm, 500);
-  console.log(debouncedSearchTerm);
 
   useEffect(() => {
     // Your search logic here using debouncedSearchTerm instead of searchTerm
