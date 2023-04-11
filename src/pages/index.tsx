@@ -24,6 +24,7 @@ const SearchBar = () => {
 
   useEffect(() => {
     // Your search logic here using debouncedSearchTerm instead of searchTerm
+    //Example:
     axios.get(`https://demo.dataverse.org/api/search?q=${debouncedSearchTerm}`);
   }, [debouncedSearchTerm]);
 
